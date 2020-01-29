@@ -22,11 +22,11 @@ export class User {
     @Column({type: 'varchar', length: 255})
     password?: string;
 
-    @Column({ type: Date})
+    @Column({ type: 'timestamp'})
     birthday?: Date;
 
     @Column({type: 'varchar', length: 255})
-    avatar?: string;
+    avatarUrl?: string;
 
     @Column({ type: 'enum', enum : UserRole, default : UserRole.ANONYMOUS})
     role!: UserRole;

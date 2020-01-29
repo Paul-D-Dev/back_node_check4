@@ -14,7 +14,7 @@ export class Event {
     @Column({type: 'varchar', length: 255})
     description!: string;
 
-    @Column({ type: Date})
+    @Column({ type: 'timestamp'})
     date!: Date;
 
     @ManyToOne(type => Circus, circus => circus.events)

@@ -18,7 +18,7 @@ export class Employee {
     description?: string;
 
     @Column({type: 'varchar', length: 255})
-    image!: string;
+    avatarUrl!: string;
 
     @OneToOne(type => Circus, circus => circus.employee)
     circus!: Circus;
