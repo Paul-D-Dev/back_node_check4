@@ -23,7 +23,7 @@ export class User {
     password?: string;
 
     @Column({ type: Date})
-    birtday?: Date;
+    birthday?: Date;
 
     @Column({type: 'varchar', length: 255})
     avatar?: string;

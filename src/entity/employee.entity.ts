@@ -2,8 +2,8 @@ import { Circus } from './circus.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
 import { User } from './user.entity';
 
-@Entity('team')
-export class Team {
+@Entity('employee')
+export class Employee {
 
     @PrimaryGeneratedColumn()
     id!: number;
@@ -20,7 +20,7 @@ export class Team {
     @Column({type: 'varchar', length: 255})
     image!: string;
 
-    @OneToOne(type => Circus, circus => circus.team)
+    @OneToOne(type => Circus, circus => circus.employee)
     circus!: Circus;
 }
 

@@ -1,10 +1,10 @@
-import { Ticket } from './../entity/ticket.entity';
-import { Team } from './../entity/team.entity';
-import { Event } from './../entity/event.entity';
-import { Circus } from './../entity/circus.entity';
-import { Address } from './../entity/address.entity';
 import { createConnection } from 'typeorm';
 import { User } from '../entity/user.entity';
+import { Address } from './../entity/address.entity';
+import { Circus } from './../entity/circus.entity';
+import { Employee } from './../entity/employee.entity';
+import { Event } from './../entity/event.entity';
+import { Ticket } from './../entity/ticket.entity';
 
 export default async () => {
 
@@ -21,7 +21,7 @@ export default async () => {
             Address,
             Circus,
             Event,
-            Team,
+            Employee,
             Ticket,
 
         ],

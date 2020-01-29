@@ -1,4 +1,4 @@
-import { Team } from './team.entity';
+import { Employee } from './employee.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Address } from './address.entity';
 import { Event } from './event.entity';
@@ -15,9 +15,9 @@ export class Circus {
     @Column({type: 'varchar', length: 255})
     phone!: string;
 
-    @OneToOne( type => Team, team => team.circus)
+    @OneToOne( type => Employee, employee => employee.circus)
     @JoinColumn()
-    team!: Team;
+    employee!: Employee;
 
     @OneToOne(type => Address, address => address.circus )
     @JoinColumn()
