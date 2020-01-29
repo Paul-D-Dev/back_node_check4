@@ -1,5 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Ticket } from './ticket.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToOne } from 'typeorm';
+import { Circus } from './circus.entity';
 
+export enum UserRole {
+    ANONYMOUS = 'anonymous',
+    USER = 'user',
+    ADMIN = 'admin',
+}
 @Entity('user')
 export class User {
 
@@ -13,13 +20,22 @@ export class User {
     email!: string;
 
     @Column({type: 'varchar', length: 255})
-    password!: string;
+    password?: string;
+
+    @Column({ type: Date})
+    birtday?: Date;
 
     @Column({type: 'varchar', length: 255})
-    avatar!: string;
+    avatar?: string;
+
+    @Column({ type: 'enum', enum : UserRole, default : UserRole.ANONYMOUS})
+    role!: UserRole;
 
     @Column({ type: 'boolean', default: false})
-    activated!: boolean;
+    activated?: boolean;
+
+    @ManyToMany( type => Ticket, ticket => ticket.users)
+    tickets!: Ticket[];
 
 }
 
