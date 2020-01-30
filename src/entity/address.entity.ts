@@ -16,10 +16,10 @@ export class Address {
     @Column()
     zip!: number;
 
-    @Column({type: 'varchar', length: 255})
+    @Column({type: 'varchar', length: 255, nullable: true})
     x!: string;
 
-    @Column({type: 'varchar', length: 255})
+    @Column({type: 'varchar', length: 255, nullable: true})
     y!: string;
 
     @OneToOne(type => Circus, circus => circus.address)

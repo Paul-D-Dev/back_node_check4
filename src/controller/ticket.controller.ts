@@ -1,4 +1,4 @@
-import { Application, Router } from 'express';
+import { Application, Router, Request, Response } from 'express';
 import { commonController } from '../core/common_functions.controller';
 import { TicketService } from '../services/ticket.service';
 
@@ -13,6 +13,10 @@ export const TicketController = (app: Application) => {
   const service = new TicketService();
 
   let ticketRouter = Router();
+
+  ticketRouter.get('/:id', async (req: Request, res: Response) => {
+    return res.send(await service.getOneTicket(parseInt(req.params.id, 10)));
+  });
 
   ticketRouter = commonController(service, ticketRouter);
 

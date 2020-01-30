@@ -1,6 +1,6 @@
-import { Ticket } from './ticket.entity';
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Circus } from './circus.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne } from 'typeorm';
+import { Ticket } from './ticket.entity';
 
 @Entity('event')
 export class Event {
@@ -11,17 +11,28 @@ export class Event {
     @Column({type: 'varchar', length : 255})
     name!: string;
 
-    @Column({type: 'varchar', length: 255})
+    @Column({type: 'text'})
     description!: string;
 
-    @Column({ type: 'timestamp'})
+    @CreateDateColumn({ type: 'timestamp'})
     date!: Date;
+
+    @Column({type: 'varchar', length: 255})
+    image!: string;
+
+    @Column()
+    priceAdult!: number;
+
+    @Column()
+    quantity!: number;
 
     @ManyToOne(type => Circus, circus => circus.events)
     circus!: Circus;
 
-    @OneToOne(type => Ticket, ticket => ticket.event)
-    ticket!: Ticket;
+    @OneToMany(type => Ticket, ticket => ticket.event)
+    tickets!: Ticket;
+
+    // add price
 
 }
 

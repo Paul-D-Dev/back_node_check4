@@ -10,5 +10,15 @@ export class UserService extends AbstractService {
 
   protected repository = getCustomRepository(UserRepository);
 
+  relations = ['tickets'];
+
+  async getAll() {
+    return await this.repository.find({relations: this.relations});
+  }
+
+  async getOneUser(id: number) {
+    return await this.repository.findOne(id, {relations: this.relations});
+  }
+
 }
 

@@ -28,6 +28,8 @@ export const commonController = (service: AbstractService, commonRouter = Router
   });
 
   commonRouter.post('/', async (req: Request, res: Response) => {
+    console.log(req.body);
+
     res.send(await service.create(req.body));
   });
 

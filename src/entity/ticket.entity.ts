@@ -1,6 +1,6 @@
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Event } from './event.entity';
 import { User } from './user.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToOne } from 'typeorm';
 
 @Entity('ticket')
 export class Ticket {
@@ -11,19 +11,17 @@ export class Ticket {
     @Column({type: 'varchar', length : 255})
     name!: string;
 
-    @Column({type: 'varchar', length: 255})
-    description!: string;
-
     @Column()
     price!: number;
 
-    @Column({ type: 'boolean'})
-    isChild!: boolean;
+    @Column()
+    quantity!: number;
 
-    @ManyToMany(type => User, user => user.tickets)
-    users!: User[];
+    @ManyToOne(type => User, user => user.tickets)
+    user!: User;
 
-    @OneToOne(type => Event, event => event.ticket)
+    @ManyToOne(type => Event, event => event.tickets)
+    @JoinColumn()
     event!: Event;
 
 }

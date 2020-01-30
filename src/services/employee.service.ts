@@ -10,5 +10,15 @@ export class EmployeeService extends AbstractService {
 
   protected repository = getCustomRepository(EmployeeRepository);
 
+  relations = ['circus'];
+
+  async getAll() {
+    return await this.repository.find({relations: this.relations});
+  }
+
+  async getOneEmployee(id: number) {
+    return await this.repository.findOne(id, {relations: this.relations});
+  }
+
 }
 

@@ -10,11 +10,15 @@ import { UserService } from '../services/user.service';
  * @param app l'application express
  */
 export const UserController = (app: Application) => {
-  const userService = new UserService();
+  const service = new UserService();
 
   let userRouter = Router();
 
-  userRouter = commonController(userService, userRouter);
+  userRouter.get('/:id', async (req: Request, res: Response) => {
+    return res.send(await service.getOneUser(parseInt(req.params.id, 10)));
+  });
+
+  userRouter = commonController(service, userRouter);
 
   app.use('/users', userRouter);
 

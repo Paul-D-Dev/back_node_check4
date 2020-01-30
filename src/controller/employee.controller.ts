@@ -15,6 +15,10 @@ export const EmployeeController = (app: Application) => {
 
   let employeeRouter = Router();
 
+  employeeRouter.get('/:id', async (req: Request, res: Response) => {
+    return res.send(await service.getOneEmployee(parseInt(req.params.id, 10)));
+  });
+
   employeeRouter = commonController(service, employeeRouter);
 
   app.use('/employees', employeeRouter);

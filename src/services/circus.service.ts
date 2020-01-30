@@ -10,5 +10,14 @@ export class CircusService extends AbstractService {
 
   protected repository = getCustomRepository(CircusRepository);
 
-}
+  relations = ['address', 'employees', 'events'];
 
+  async getAll() {
+    return this.repository.find({relations : this.relations});
+  }
+
+  async getOneCircus(id: number) {
+    return this.repository.findOne(id, {relations : this.relations});
+  }
+
+}

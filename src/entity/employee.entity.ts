@@ -1,5 +1,5 @@
 import { Circus } from './circus.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, ManyToOne } from 'typeorm';
 import { User } from './user.entity';
 
 @Entity('employee')
@@ -14,13 +14,13 @@ export class Employee {
     @Column({type: 'varchar', length: 255})
     job!: string;
 
-    @Column({type: 'varchar', length: 255})
+    @Column({type: 'text'})
     description?: string;
 
-    @Column({type: 'varchar', length: 255})
+    @Column({type: 'varchar', length: 255, nullable: true})
     avatarUrl!: string;
 
-    @OneToOne(type => Circus, circus => circus.employee)
+    @ManyToOne(type => Circus, circus => circus.employees)
     circus!: Circus;
 }
 

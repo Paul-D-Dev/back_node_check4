@@ -1,3 +1,5 @@
+import { UserRepository } from './../repository/user.repository';
+import { Ticket } from './../entity/ticket.entity';
 import { getCustomRepository } from 'typeorm';
 import { AbstractService } from '../core/abstract.services';
 import { TicketRepository } from '../repository/ticket.repository';
@@ -9,6 +11,26 @@ import { TicketRepository } from '../repository/ticket.repository';
 export class TicketService extends AbstractService {
 
   protected repository = getCustomRepository(TicketRepository);
+  userRepository = getCustomRepository(UserRepository);
+
+  relations = ['event', 'user'];
+
+  async getAll() {
+    return await this.repository.find({relations: this.relations});
+  }
+
+  async getOneTicket(id: number) {
+    return await this.repository.findOne(id, {relations: this.relations});
+  }
+
+  async create(ticket: Ticket) {
+
+      let user = this.userRepository.create(ticket.user);
+      user = await this.userRepository.save(user);
+      ticket.user = user;
+      ticket = this.repository.create(ticket);
+      this.repository.save(ticket);
+  }
 
 }
 

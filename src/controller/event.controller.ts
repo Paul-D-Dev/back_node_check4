@@ -1,4 +1,4 @@
-import { Application, Router } from 'express';
+import { Application, Router, Request, Response } from 'express';
 import { commonController } from '../core/common_functions.controller';
 import { EventService } from '../services/event.service';
 
@@ -13,6 +13,10 @@ export const EventController = (app: Application) => {
   const service = new EventService();
 
   let eventRouter = Router();
+
+  eventRouter.get('/:id', async (req: Request, res: Response) => {
+    return res.send(await service.getOneEvent(parseInt(req.params.id, 10)));
+  });
 
   eventRouter = commonController(service, eventRouter);
 
